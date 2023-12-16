@@ -1,5 +1,6 @@
 package com.dacproject.dacproject.dtos;
 
+import com.dacproject.dacproject.entities.Aluno;
 import com.dacproject.dacproject.entities.Empresa;
 import com.dacproject.dacproject.entities.Estagio;
 import com.dacproject.dacproject.entities.Orientador;
@@ -29,7 +30,18 @@ public class AlunoDTO{
             this.estagio = estagio;
         }
 
-        // Getters e setters
+    public AlunoDTO(Aluno aluno) {
+        this.id = aluno.getId();
+        this.nome = aluno.getNome();
+        this.matricula = aluno.getMatricula();
+        this.orientador = aluno.getOrientador();
+        this.empresa = aluno.getEmpresa();
+        this.estagio = aluno.getEstagio();
+        // Outros atributos...
+    }
+
+
+    // Getters e setters
 
         public Long getId() {
             return id;

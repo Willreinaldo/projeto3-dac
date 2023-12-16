@@ -26,8 +26,8 @@ import com.dacproject.dacproject.entities.Role;
 import com.dacproject.dacproject.entities.Usuario;
 import com.dacproject.dacproject.repositories.RoleRepository;
 import com.dacproject.dacproject.repositories.UsuarioRepository;
-import com.dacproject.dacproject.services.execptions.DatabaseException;
-import com.dacproject.dacproject.services.execptions.ResourceNotFoundException;
+import com.dacproject.dacproject.services.exceptions.DatabaseException;
+import com.dacproject.dacproject.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UsuarioService implements UserDetailsService {

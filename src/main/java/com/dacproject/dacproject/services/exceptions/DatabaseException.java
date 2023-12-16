@@ -1,4 +1,4 @@
-package com.dacproject.dacproject.services.execptions;
+package com.dacproject.dacproject.services.exceptions;
 
 
 public class DatabaseException extends RuntimeException {

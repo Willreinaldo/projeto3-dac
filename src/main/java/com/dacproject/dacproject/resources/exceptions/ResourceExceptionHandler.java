@@ -10,8 +10,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
-import com.dacproject.dacproject.services.execptions.DatabaseException;
-import com.dacproject.dacproject.services.execptions.ResourceNotFoundException;
+import com.dacproject.dacproject.services.exceptions.DatabaseException;
+import com.dacproject.dacproject.services.exceptions.ResourceNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {

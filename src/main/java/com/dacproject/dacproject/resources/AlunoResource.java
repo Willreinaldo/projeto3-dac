@@ -1,7 +1,10 @@
 package com.dacproject.dacproject.resources;
 
-import com.dacproject.dacproject.entities.Aluno;
+import com.dacproject.dacproject.dtos.AlunoDTO;
+import com.dacproject.dacproject.services.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,28 +23,23 @@ public class AlunoResource {
         this.alunoService = alunoService;
     }
 
-    @PostMapping
-    public ResponseEntity<Aluno> criarAluno(@RequestBody Aluno aluno) {
-        Aluno novoAluno = alunoService.criarAluno(aluno);
-        return ResponseEntity.status(HttpStatus.CREATED).body(novoAluno);
+    @GetMapping
+    public ResponseEntity<Page<AlunoDTO>> findAll(Pageable pageable) {
+        Page<AlunoDTO> list = alunoService.findAllPaged(pageable);
+        return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Aluno> obterAlunoPorId(@PathVariable Long id) {
-        Optional<Aluno> aluno = alunoService.encontrarAlunoPorId(id);
+    public ResponseEntity<AlunoDTO> obterAlunoPorId(@PathVariable Long id) {
+        Optional<AlunoDTO> aluno = alunoService.findById(id);
         return aluno.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @GetMapping
-    public ResponseEntity<List<Aluno>> listarAlunos() {
-        List<Aluno> alunos = alunoService.listarTodosAlunos();
-        return ResponseEntity.ok(alunos);
-    }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Aluno> atualizarAluno(@PathVariable Long id, @RequestBody Aluno alunoAtualizado) {
+    public ResponseEntity<AlunoDTO> atualizarAluno(@PathVariable Long id, @RequestBody AlunoDTO alunoAtualizado) {
         alunoAtualizado.setId(id);
-        Aluno aluno = alunoService.atualizarAluno(alunoAtualizado);
+        AlunoDTO aluno = alunoService.atualizarAluno(id, alunoAtualizado);
         return ResponseEntity.ok(aluno);
     }
 

@@ -6,9 +6,6 @@ import java.util.Set;
 
 import javax.persistence.*;
 
-/* Entidade de persistência
- * Modelo visto em outros exemplos na utilização da JPA
- */
 @Entity
 @Table(name="Aluno")
 public class Aluno {
