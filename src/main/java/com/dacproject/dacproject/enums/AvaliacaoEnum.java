@@ -1,4 +1,4 @@
-package com.dacproject.dacproject.entities;
+package com.dacproject.dacproject.enums;
 
 public enum AvaliacaoEnum {
     INSUFICIENTE,
