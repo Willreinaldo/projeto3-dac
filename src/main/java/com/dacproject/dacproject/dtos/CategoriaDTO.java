@@ -2,7 +2,7 @@ package com.dacproject.dacproject.dtos;
 
 import java.io.Serializable;
 
-import com.dacproject.dacproject.entities.Categoria;
+import com.dacproject.dacproject.entities.Aluno;
 
 public class CategoriaDTO implements Serializable{
     private static final long serialVersionUID = 1L;
@@ -18,7 +18,7 @@ public class CategoriaDTO implements Serializable{
 		this.descricao = descricao;
 	}
 	
-	public CategoriaDTO(Categoria entity) {
+	public CategoriaDTO(Aluno entity) {
 		this.id = entity.getId();
 		this.descricao = entity.getDescricao();
 	}

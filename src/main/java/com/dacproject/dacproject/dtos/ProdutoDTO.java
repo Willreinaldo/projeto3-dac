@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import com.dacproject.dacproject.entities.Categoria;
+import com.dacproject.dacproject.entities.Aluno;
 import com.dacproject.dacproject.entities.Produto;
 
 public class ProdutoDTO implements Serializable {
@@ -42,7 +42,7 @@ public class ProdutoDTO implements Serializable {
 		this.quantidade = entity.getQuantidade();
 	}
 	
-	public ProdutoDTO(Produto entity, Set<Categoria> categorias) {
+	public ProdutoDTO(Produto entity, Set<Aluno> categorias) {
 		this(entity);
 		categorias.forEach(cat -> this.categorias.add(new CategoriaDTO(cat)));
 	}

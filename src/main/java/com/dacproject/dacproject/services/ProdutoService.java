@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.dacproject.dacproject.dtos.CategoriaDTO;
 import com.dacproject.dacproject.dtos.ProdutoDTO;
-import com.dacproject.dacproject.entities.Categoria;
+import com.dacproject.dacproject.entities.Aluno;
 import com.dacproject.dacproject.entities.Produto;
 import com.dacproject.dacproject.repositories.CategoriaRepository;
 import com.dacproject.dacproject.repositories.ProdutoRepository;
@@ -44,7 +44,7 @@ public class ProdutoService {
 	 */
 	@Transactional(readOnly = true)
 	public Page<ProdutoDTO> findAllPaged(Long categoriaId, String nome, Pageable pageable) {
-		List<Categoria> categorias = (categoriaId == 0) ? null : Arrays.asList(categoriaRepository.getOne(categoriaId));
+		List<Aluno> categorias = (categoriaId == 0) ? null : Arrays.asList(categoriaRepository.getOne(categoriaId));
 		Page<Produto> page = repository.find(categorias, nome, pageable);
 		repository.findProductsWithCategories(page.getContent());
 		return page.map(x -> new ProdutoDTO(x, x.getCategorias()));
@@ -99,7 +99,7 @@ public class ProdutoService {
 		
 		entity.getCategorias().clear();
 		for (CategoriaDTO catDto : dto.getCategorias()) {
-			Categoria categoria = categoriaRepository.getOne(catDto.getId());
+			Aluno categoria = categoriaRepository.getOne(catDto.getId());
 			entity.getCategorias().add(categoria);
 	    }
 	}

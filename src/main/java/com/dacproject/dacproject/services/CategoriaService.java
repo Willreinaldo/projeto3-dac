@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.dacproject.dacproject.dtos.CategoriaDTO;
-import com.dacproject.dacproject.entities.Categoria;
+import com.dacproject.dacproject.entities.Aluno;
 import com.dacproject.dacproject.repositories.CategoriaRepository;
 import com.dacproject.dacproject.services.execptions.DatabaseException;
 import com.dacproject.dacproject.services.execptions.ResourceNotFoundException;
@@ -38,20 +38,20 @@ public class CategoriaService implements Serializable{
 	 */
 	@Transactional(readOnly = true)
 	public Page<CategoriaDTO> findAllPaged(Pageable pageable) {
-		Page<Categoria> list = repository.findAll(pageable);
+		Page<Aluno> list = repository.findAll(pageable);
 		return list.map(x -> new CategoriaDTO(x));
 	}
 
 	@Transactional(readOnly = true)
 	public CategoriaDTO findById(Long id) {
-		Optional<Categoria> obj = repository.findById(id);
-		Categoria entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+		Optional<Aluno> obj = repository.findById(id);
+		Aluno entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
 		return new CategoriaDTO(entity);
 	}
 
 	@Transactional
 	public CategoriaDTO insert(CategoriaDTO dto) {
-		Categoria entity = new Categoria();
+		Aluno entity = new Aluno();
 		entity.setDescricao(dto.getDescricao());
 		entity = repository.save(entity);
 		return new CategoriaDTO(entity);
@@ -60,7 +60,7 @@ public class CategoriaService implements Serializable{
 	@Transactional
 	public CategoriaDTO update(Long id, CategoriaDTO dto) {
 		try {
-			Categoria entity = repository.getOne(id);
+			Aluno entity = repository.getOne(id);
 			entity.setDescricao(dto.getDescricao());
 			entity = repository.save(entity);
 			return new CategoriaDTO(entity);

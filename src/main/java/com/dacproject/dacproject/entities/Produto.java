@@ -39,7 +39,7 @@ public class Produto implements Serializable{
     @JoinTable(name = "tb_produto_categoria",
         joinColumns = @JoinColumn(name = "produto_id"),
         inverseJoinColumns = @JoinColumn(name = "categoria_id")) 
-    private Set<Categoria> categorias = new HashSet<>();
+    private Set<Aluno> categorias = new HashSet<>();
 
     public Produto() {
     }
@@ -96,7 +96,7 @@ public class Produto implements Serializable{
         this.quantidade = quantidade;
     }
 
-    public Set<Categoria> getCategorias() {
+    public Set<Aluno> getCategorias() {
         return categorias;
     }
 

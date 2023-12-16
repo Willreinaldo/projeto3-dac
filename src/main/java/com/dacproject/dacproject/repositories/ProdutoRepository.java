@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.dacproject.dacproject.entities.Categoria;
+import com.dacproject.dacproject.entities.Aluno;
 import com.dacproject.dacproject.entities.Produto;
 
 /*Interface que herda componentes do spring: JPA
@@ -24,7 +24,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long>{
     @Query("SELECT DISTINCT obj FROM Produto obj INNER JOIN obj.categorias cats WHERE "
 			+ "(COALESCE(:categorias) IS NULL OR cats IN :categorias) AND "
 			+ "(LOWER(obj.descricao) LIKE LOWER(CONCAT('%',:descricao,'%'))) ")
-	Page<Produto> find(List<Categoria> categorias, String descricao, Pageable pageable);
+	Page<Produto> find(List<Aluno> categorias, String descricao, Pageable pageable);
 	
 	@Query("SELECT obj FROM Produto obj JOIN FETCH obj.categorias WHERE obj IN :produtos")
 	List<Produto> findProductsWithCategories(List<Produto> produtos);

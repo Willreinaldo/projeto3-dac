@@ -4,42 +4,34 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /* Entidade de persistência
  * Modelo visto em outros exemplos na utilização da JPA
  */
-
 @Entity
-@Table(name = "tb_categoria")
-public class Categoria implements Serializable{
-    private static final long serialVersionUID = 1L;
-
+@Table(name="Aluno")
+public class Aluno {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
-    @Column(nullable = false)
-    private String descricao;
 
-    @ManyToMany(mappedBy = "categorias")
-    private Set<Produto> produtos = new HashSet<>();
+    @Column(name="nome", length=50, nullable=false, unique=false)
+    private String nome;
 
-    public Categoria() {
-    }
+    @Column(name="matricula", length=10, nullable=false, unique=true)
+    private String matricula;
 
-     /*Aqui utilizaremos o contrutor com parâmetros
-     * ütil na utilização do padrão DTO
-     */
-    public Categoria(Long id, String descricao) {
-        this.id = id;
-        this.descricao = descricao;
-    }
+    @ManyToOne
+    @JoinColumn(name = "orientador_id")
+    private Orientador orientador;
+
+    @ManyToOne
+    @JoinColumn(name = "empresa_id")
+    private Empresa empresa;
+
+    @OneToOne(mappedBy = "aluno")
+    private Estagio estagio;
 
     public Long getId() {
         return id;
@@ -49,41 +41,43 @@ public class Categoria implements Serializable{
         this.id = id;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public String getNome() {
+        return nome;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
-      public Set<Produto> getProdutos() {
-        return produtos;
+    public String getMatricula() {
+        return matricula;
     }
 
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        return result;
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        Categoria other = (Categoria) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        return true;
+    public Orientador getOrientador() {
+        return orientador;
     }
 
+    public void setOrientador(Orientador orientador) {
+        this.orientador = orientador;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Estagio getEstagio() {
+        return estagio;
+    }
+
+    public void setEstagio(Estagio estagio) {
+        this.estagio = estagio;
+    }
 }
