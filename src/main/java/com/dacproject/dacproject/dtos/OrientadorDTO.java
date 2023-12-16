@@ -1,2 +1,4 @@
-package com.dacproject.dacproject.dtos;public class OrientadorDTO {
+package com.dacproject.dacproject.dtos;
+
+public class OrientadorDTO {
 }

@@ -1,2 +1,4 @@
-package com.dacproject.dacproject.dtos;public class AvaliacaoEmpresaDTO {
+package com.dacproject.dacproject.dtos;
+
+public class AvaliacaoEmpresaDTO {
 }
