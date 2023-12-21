@@ -1,8 +1,9 @@
 package com.dacproject.dacproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
-
 @Entity
 @Table(name="Orientador")
 public class Orientador {
@@ -14,10 +15,12 @@ public class Orientador {
     private Long id;
 
     private String matricula;
-    // Outros atributos
+    private String nome;
 
-    @OneToMany(mappedBy = "orientador")
-    private List<Aluno> alunos;
+    // Outros atributos
+    @JsonIgnore
+    @OneToMany(mappedBy = "orientador", fetch = FetchType.EAGER)
+     private List<Aluno> alunos;
 
     public Orientador() {
     }
@@ -36,6 +39,22 @@ public class Orientador {
 
     public void setMatricula(String matricula) {
         this.matricula = matricula;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public List<Aluno> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Aluno> alunos) {
+        this.alunos = alunos;
     }
 
     @Override

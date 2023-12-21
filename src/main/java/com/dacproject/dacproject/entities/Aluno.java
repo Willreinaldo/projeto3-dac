@@ -1,5 +1,7 @@
 package com.dacproject.dacproject.entities;
 
+import com.fasterxml.jackson.annotation.*;
+
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +32,8 @@ public class Aluno {
     private Empresa empresa;
 
     @OneToOne(mappedBy = "aluno")
+    @JoinColumn(name = "estagio_id") // Nome da coluna que referencia a chave estrangeira de Estagio
+    @JsonIgnore
     private Estagio estagio;
 
     public Long getId() {

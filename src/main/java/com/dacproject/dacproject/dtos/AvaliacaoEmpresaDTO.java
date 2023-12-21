@@ -2,6 +2,7 @@ package com.dacproject.dacproject.dtos;
 
 
 import com.dacproject.dacproject.entities.Aluno;
+import com.dacproject.dacproject.entities.AvaliacaoEmpresa;
 import com.dacproject.dacproject.enums.AvaliacaoEnum;
 import com.dacproject.dacproject.entities.Empresa;
 
@@ -18,7 +19,7 @@ public class AvaliacaoEmpresaDTO {
 
     // Construtores, getters e setters
 
-    public AvaliacaoEmpresaDTO() {
+    public AvaliacaoEmpresaDTO(AvaliacaoEmpresa entity) {
         // Construtor padrão
     }
 

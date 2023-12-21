@@ -2,6 +2,7 @@ package com.dacproject.dacproject.dtos;
 
 import com.dacproject.dacproject.entities.Aluno;
 import com.dacproject.dacproject.entities.Empresa;
+import com.dacproject.dacproject.entities.Estagio;
 import com.dacproject.dacproject.entities.Orientador;
 
 import java.util.Date;
@@ -35,6 +36,16 @@ public class EstagioDTO {
         this.orientador = orientador;
     }
 
+    public EstagioDTO(Estagio estagio) {
+        this.id = estagio.getId();
+        this.inicioEstagio = estagio.getInicioEstagio();
+        this.fimEstagio = estagio.getFimEstagio();
+        this.cargaHoraria = estagio.getCargaHoraria();
+        this.status = estagio.getStatus();
+        this.aluno = estagio.getAluno();
+        this.empresa = estagio.getEmpresa();
+        this.orientador = estagio.getOrientador();
+    }
     // Getters e setters
 
     public Long getId() {
@@ -124,5 +135,18 @@ public class EstagioDTO {
         } else if (!id.equals(other.id))
             return false;
         return true;
+    }
+
+    public Estagio toEntity() {
+        Estagio estagio = new Estagio();
+        estagio.setId(this.id);
+        estagio.setInicioEstagio(this.inicioEstagio);
+        estagio.setFimEstagio(this.fimEstagio);
+        estagio.setCargaHoraria(this.cargaHoraria);
+        estagio.setStatus(this.status);
+        estagio.setAluno(this.aluno);
+        estagio.setEmpresa(this.empresa);
+        estagio.setOrientador(this.orientador);
+        return estagio;
     }
 }

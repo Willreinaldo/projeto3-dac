@@ -1,5 +1,9 @@
 package com.dacproject.dacproject.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,7 +20,8 @@ public class Empresa {
     private String cnpj;
 
 
-    @OneToMany(mappedBy = "empresa")
+    @JsonIgnore
+    @OneToMany(mappedBy = "empresa", fetch = FetchType.EAGER)
     private List<Aluno> alunos;
 
     // Getters e setters

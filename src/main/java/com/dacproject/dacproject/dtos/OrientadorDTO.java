@@ -1,6 +1,7 @@
 package com.dacproject.dacproject.dtos;
 
 import com.dacproject.dacproject.entities.Aluno;
+import com.dacproject.dacproject.entities.Orientador;
 
 import java.util.List;
 
@@ -8,6 +9,7 @@ public class OrientadorDTO {
 
     private Long id;
     private String matricula;
+    private String nome;
     private List<Aluno> alunos;
 
     // Construtores, getters e setters
@@ -16,10 +18,18 @@ public class OrientadorDTO {
         // Construtor padrão
     }
 
-    public OrientadorDTO(Long id, String matricula, List<Aluno> alunos) {
+    public OrientadorDTO(Long id, String matricula, List<Aluno> alunos,String nome) {
         this.id = id;
+        this.nome = nome;
         this.matricula = matricula;
         this.alunos = alunos;
+    }
+
+    public OrientadorDTO(Orientador orientador) {
+        this.id = orientador.getId();
+        this.nome = orientador.getNome();
+        this.matricula = orientador.getMatricula();
+        this.alunos = orientador.getAlunos();
     }
 
     // Getters e setters
@@ -46,6 +56,14 @@ public class OrientadorDTO {
 
     public void setAlunos(List<Aluno> alunos) {
         this.alunos = alunos;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     @Override

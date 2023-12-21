@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.bouncycastle.openssl.PasswordException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,18 +32,18 @@ import com.dacproject.dacproject.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class UsuarioService implements UserDetailsService {
-	
+
 	private static Logger logger = LoggerFactory.getLogger(UsuarioService.class);
-	
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	@Autowired
 	private UsuarioRepository repository;
-	
+
 	@Autowired
 	private RoleRepository roleRepository;
-	
+
 	@Transactional(readOnly = true)
 	public Page<UsuarioDTO> findAllPaged(Pageable pageable) {
 		Page<Usuario> list = repository.findAll(pageable);
@@ -60,7 +61,8 @@ public class UsuarioService implements UserDetailsService {
 	public UsuarioDTO insert(UsuarioInsertDTO dto) {
 		Usuario entity = new Usuario();
 		copyDtoToEntity(dto, entity);
-		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+	 entity.setPassword(passwordEncoder.encode(dto.getPassword()));
+		System.out.println(dto.getPassword());
 		entity = repository.save(entity);
 		return new UsuarioDTO(entity);
 	}
@@ -75,7 +77,7 @@ public class UsuarioService implements UserDetailsService {
 		}
 		catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("Id não encontrado " + id);
-		}		
+		}
 	}
 
 	public void delete(Long id) {
@@ -89,13 +91,13 @@ public class UsuarioService implements UserDetailsService {
 			throw new DatabaseException("Integrity violation");
 		}
 	}
-	
+
 	private void copyDtoToEntity(UsuarioDTO dto, Usuario entity) {
 
 		entity.setFirstName(dto.getFirstName());
 		entity.setLastName(dto.getLastName());
 		entity.setEmail(dto.getEmail());
-		
+
 		entity.getRoles().clear();
 		for (RoleDTO roleDto : dto.getRoles()) {
 			Role role = roleRepository.getOne(roleDto.getId());
@@ -105,13 +107,15 @@ public class UsuarioService implements UserDetailsService {
 	}
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
         Usuario usuario = repository.findByEmail(username);
 		if (usuario == null) {
 			logger.error("Usuário não encontrado: " + username);
 			throw new UsernameNotFoundException("Email não encontrado");
 		}
-		logger.info("Usuário encontrado: " + username);
-		return usuario;
+			logger.info("Usuário encontrado: " + username);
+			return usuario;
+
+
     }
 }

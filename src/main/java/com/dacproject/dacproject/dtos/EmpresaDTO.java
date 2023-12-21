@@ -1,6 +1,7 @@
 package com.dacproject.dacproject.dtos;
 
 import com.dacproject.dacproject.entities.Aluno;
+import com.dacproject.dacproject.entities.Empresa;
 
 import java.util.List;
 
@@ -22,6 +23,14 @@ public class EmpresaDTO {
         this.nome = nome;
         this.cnpj = cnpj;
         this.alunos = alunos;
+    }
+
+    public EmpresaDTO(Empresa empresa) {
+        this.id = empresa.getId();
+        this.nome = empresa.getNome();
+        this.cnpj = empresa.getCnpj();
+        this.alunos = empresa.getAlunos();
+
     }
 
     // Getters e setters

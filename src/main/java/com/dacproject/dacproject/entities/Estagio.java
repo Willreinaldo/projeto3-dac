@@ -1,11 +1,17 @@
 package com.dacproject.dacproject.entities;
 
+import com.dacproject.dacproject.dtos.EstagioDTO;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import org.codehaus.jackson.annotate.JsonBackReference;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name="Estagio")
-public class Estagio {
+public class Estagio extends EstagioDTO {
     private static final long serialVersionUID = 1L;
 
     @Id
@@ -22,6 +28,10 @@ public class Estagio {
 
     @OneToOne
     private Empresa empresa;
+
+    @OneToOne
+    private Orientador orientador;
+
 
     public Long getId() {
         return id;
@@ -86,10 +96,6 @@ public class Estagio {
     public void setOrientador(Orientador orientador) {
         this.orientador = orientador;
     }
-
-    @OneToOne
-    private Orientador orientador;
-
 
     @Override
     public int hashCode() {

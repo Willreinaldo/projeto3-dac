@@ -14,7 +14,6 @@ public class AlunoDTO{
         private Empresa empresa;
         private Estagio estagio;
 
-        // Construtores, getters e setters
 
         public AlunoDTO() {
             // Construtor padrão
