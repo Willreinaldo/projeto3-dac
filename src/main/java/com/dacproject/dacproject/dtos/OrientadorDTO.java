@@ -1,6 +1,7 @@
 package com.dacproject.dacproject.dtos;
 
 import com.dacproject.dacproject.entities.Aluno;
+import com.dacproject.dacproject.entities.AvaliacaoOrientador;
 import com.dacproject.dacproject.entities.Orientador;
 
 import java.util.List;
@@ -31,6 +32,7 @@ public class OrientadorDTO {
         this.matricula = orientador.getMatricula();
         this.alunos = orientador.getAlunos();
     }
+
 
     // Getters e setters
 

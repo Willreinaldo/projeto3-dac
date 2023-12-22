@@ -53,7 +53,7 @@ public class EstagioService {
             return new EstagioDTO(estagio);
         } catch (Exception e) {
             System.out.println("Erro ao criar estágio: " + e.getMessage());
-            throw new DatabaseException("Erro ao criar um novo Estágio");
+            throw new DatabaseException("Erro ao criar um novo Estágio", e);
         }
     }
 
@@ -72,7 +72,7 @@ public class EstagioService {
             throw e;
         } catch (Exception e) {
             System.out.println("Erro ao atualizar estágio: " + e.getMessage());
-            throw new DatabaseException("Erro ao atualizar o Estágio");
+            throw new DatabaseException("Erro ao atualizar o Estágio", e);
         }
     }
 
@@ -82,7 +82,7 @@ public class EstagioService {
         } catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException("Estágio não encontrado com o ID fornecido.");
         } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Violação de integridade");
+            throw new DatabaseException("Violação de integridade", e);
         }
     }
 

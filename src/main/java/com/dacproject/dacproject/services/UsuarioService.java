@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
-import org.bouncycastle.openssl.PasswordException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -88,7 +87,7 @@ public class UsuarioService implements UserDetailsService {
 			throw new ResourceNotFoundException("Id não encontrado " + id);
 		}
 		catch (DataIntegrityViolationException e) {
-			throw new DatabaseException("Integrity violation");
+			throw new DatabaseException("Integrity violation", e);
 		}
 	}
 

@@ -46,7 +46,9 @@ public class OrientadorService{
         return new OrientadorDTO(entity);
     }
 
-    @Transactional
+
+
+ @Transactional
     public OrientadorDTO atualizarOrientador(Long id, OrientadorDTO dto) {
         try {
             Orientador entity = repository.getOne(id);
@@ -58,19 +60,20 @@ public class OrientadorService{
         }
     }
 
+
+
     public void removerOrientador(Long id) {
         try {
             repository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException("Orientador não encontrado com o ID: " + id);
         } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Violação de integridade");
+            throw new DatabaseException("Violação de integridade", e);
         }
     }
 
     private void copyDtoToEntity(OrientadorDTO dto, Orientador entity) {
-        entity.setId(dto.getId());
-        entity.setMatricula(dto.getMatricula());
+         entity.setMatricula(dto.getMatricula());
         entity.setNome(dto.getNome());
         // Outros atributos do Orientador, se houver
     }

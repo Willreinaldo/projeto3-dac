@@ -31,9 +31,10 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	
 	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
 	
-	private static final String[] OPERATOR_OR_ADMIN = { "/aluno/**", "/categorias/**","/usuarios/**" };
+	private static final String[] OPERATOR_OR_ADMIN = { "/alunos/**", "/orientador/**","/estagios/**",
+			"/empresas/**","/avaliacoesempresa/**","/avaliacoesorientador/**" };
 	
-	private static final String[] ADMIN = { "/usuarios2" };
+	private static final String[] ADMIN = { "/usuarios/**" };
 	
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -54,10 +55,23 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .antMatchers(OPERATOR_OR_ADMIN).hasAnyRole("OPERATOR", "ADMIN")
                 .antMatchers(ADMIN).hasRole("ADMIN")
                 .anyRequest().authenticated());
-		
+
 		http.cors().configurationSource(corsConfigurationSource());
 	}
-	
+//CASO NÃO CONSIGA LOGAR NO OAUTH2 USE ESSA CONFIGURAÇÃO PRA TESTA A APLICAÇÃO
+	/* @Override
+	public void configure(HttpSecurity http) throws Exception {
+		http
+				.authorizeRequests()
+				.antMatchers("/**").permitAll()
+				.anyRequest().authenticated()
+				.and()
+				.formLogin()
+				.permitAll()
+				.and()
+				.logout()
+				.permitAll();
+	} */
 	@Bean
 	public CorsConfigurationSource corsConfigurationSource() {
 	    CorsConfiguration corsConfig = new CorsConfiguration();

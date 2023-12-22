@@ -2,6 +2,7 @@ package com.dacproject.dacproject.dtos;
 
 import com.dacproject.dacproject.entities.Aluno;
 import com.dacproject.dacproject.entities.Empresa;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
 
@@ -10,6 +11,8 @@ public class EmpresaDTO {
     private Long id;
     private String nome;
     private String cnpj;
+
+    @JsonIgnore
     private List<Aluno> alunos;
 
     // Construtores, getters e setters

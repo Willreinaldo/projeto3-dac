@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.*;
@@ -35,6 +36,13 @@ public class Aluno {
     @JoinColumn(name = "estagio_id") // Nome da coluna que referencia a chave estrangeira de Estagio
     @JsonIgnore
     private Estagio estagio;
+
+    @OneToMany(mappedBy = "aluno")
+    private List<AvaliacaoOrientador> avaliacoesOrientador;
+
+    @OneToMany(mappedBy = "aluno")
+    @JsonIgnore
+    private List<AvaliacaoEmpresa> avaliacoesEmpresa;
 
     public Long getId() {
         return id;

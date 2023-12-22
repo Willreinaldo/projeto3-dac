@@ -14,9 +14,11 @@ public class AvaliacaoOrientador {
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "aluno_id")
     private Aluno aluno;
 
     @ManyToOne
+    @JoinColumn(name = "orientador_id")
     private Orientador orientador;
 
     @Enumerated(EnumType.STRING)

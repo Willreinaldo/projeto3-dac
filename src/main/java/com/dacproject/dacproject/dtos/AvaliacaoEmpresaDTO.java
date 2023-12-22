@@ -19,7 +19,7 @@ public class AvaliacaoEmpresaDTO {
 
     // Construtores, getters e setters
 
-    public AvaliacaoEmpresaDTO(AvaliacaoEmpresa entity) {
+    public AvaliacaoEmpresaDTO(   ) {
         // Construtor padrão
     }
 
@@ -34,6 +34,16 @@ public class AvaliacaoEmpresaDTO {
         this.cumprimentoTarefas = cumprimentoTarefas;
         this.aprendizagem = aprendizagem;
         this.desempenho = desempenho;
+    }
+    public AvaliacaoEmpresaDTO(AvaliacaoEmpresa avaliacaoEmpresa) {
+        this.id = avaliacaoEmpresa.getId();
+        this.aluno = avaliacaoEmpresa.getAluno();
+        this.empresa = avaliacaoEmpresa.getEmpresa();
+        this.rendimentoTrabalho = avaliacaoEmpresa.getRendimentoTrabalho();
+        this.conhecimentos = avaliacaoEmpresa.getConhecimentos();
+        this.cumprimentoTarefas = avaliacaoEmpresa.getCumprimentoTarefas();
+        this.aprendizagem = avaliacaoEmpresa.getAprendizagem();
+        this.desempenho = avaliacaoEmpresa.getDesempenho();
     }
 
     // Getters e setters

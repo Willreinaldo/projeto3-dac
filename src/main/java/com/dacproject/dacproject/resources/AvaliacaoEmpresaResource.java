@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
+import javax.validation.ValidationException;
 import java.util.Optional;
 
 @RestController
@@ -47,14 +49,17 @@ public class AvaliacaoEmpresaResource {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AvaliacaoEmpresaDTO> atualizarAvaliacaoEmpresa(@PathVariable @Valid Long id, @RequestBody AvaliacaoEmpresaDTO avaliacaoAtualizada) {
+    public ResponseEntity<?> atualizarAvaliacaoEmpresa(@PathVariable Long id, @RequestBody @Valid AvaliacaoEmpresaDTO avaliacaoAtualizada) {
         try {
-            avaliacaoAtualizada.setId(id);
             AvaliacaoEmpresaDTO avaliacao = avaliacaoEmpresaService.atualizarAvaliacaoEmpresa(id, avaliacaoAtualizada);
             return ResponseEntity.ok(avaliacao);
-        } catch (Exception e) {
-            // Tratar exceção de não encontrar a Avaliação da Empresa ou outra exceção de serviço
+        } catch (EntityNotFoundException e) {
             return ResponseEntity.notFound().build();
+        } catch (ValidationException e) {
+            return ResponseEntity.badRequest().body("Erro de validação: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Ocorreu um erro interno no servidor: "+e);
         }
     }
 

@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
 
-import com.dacproject.dacproject.dtos.EstagioDTO;
 import com.dacproject.dacproject.entities.Empresa;
 import com.dacproject.dacproject.entities.Estagio;
 import com.dacproject.dacproject.entities.Orientador;
@@ -81,7 +80,7 @@ public class AlunoService {
             throw e;
         } catch (Exception e) {
             System.out.println("Erro ao criar aluno ou estágio: " + e.getMessage());
-            throw new DatabaseException("Erro ao criar um novo Aluno ou Estágio");
+            throw new DatabaseException("Erro ao criar um novo Aluno ou Estágio", e);
         }
     }
     @Transactional
@@ -102,7 +101,7 @@ public class AlunoService {
         } catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException("Aluno not found " + id);
         } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Integrity violation");
+            throw new DatabaseException("Integrity violation", e);
         }
     }
 

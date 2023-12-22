@@ -46,7 +46,7 @@ public class AvaliacaoEmpresaService {
             entity = avaliacaoEmpresaRepository.save(entity);
             return new AvaliacaoEmpresaDTO(entity);
         } catch (Exception e) {
-            throw new DatabaseException("Erro ao criar uma nova Avaliação da Empresa");
+            throw new DatabaseException("Erro ao criar uma nova Avaliação da Empresa", e);
         }
     }
 
@@ -60,7 +60,7 @@ public class AvaliacaoEmpresaService {
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Avaliação da Empresa não encontrada com o ID: " + id);
         } catch (Exception e) {
-            throw new DatabaseException("Erro ao atualizar os dados da Avaliação da Empresa com ID: " + id);
+            throw new DatabaseException("Erro ao atualizar os dados da Avaliação da Empresa com ID: " + id, e);
         }
     }
 
@@ -70,21 +70,19 @@ public class AvaliacaoEmpresaService {
         } catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException("Avaliação da Empresa não encontrada com o ID: " + id);
         } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Violação de integridade ao remover Avaliação da Empresa com ID: " + id);
+            throw new DatabaseException("Violação de integridade ao remover Avaliação da Empresa com ID: " + id, e);
         } catch (Exception e) {
-            throw new DatabaseException("Erro ao remover a Avaliação da Empresa com ID: " + id);
+            throw new DatabaseException("Erro ao remover a Avaliação da Empresa com ID: " + id, e);
         }
     }
 
     private void copyDtoToEntity(AvaliacaoEmpresaDTO dto, AvaliacaoEmpresa entity) {
-        entity.setId(dto.getId());
-        entity.setAluno(dto.getAluno());
+         entity.setAluno(dto.getAluno());
         entity.setEmpresa(dto.getEmpresa());
         entity.setRendimentoTrabalho(dto.getRendimentoTrabalho());
         entity.setConhecimentos(dto.getConhecimentos());
         entity.setCumprimentoTarefas(dto.getCumprimentoTarefas());
         entity.setAprendizagem(dto.getAprendizagem());
         entity.setDesempenho(dto.getDesempenho());
-        // Se necessário, adicione aqui a lógica para manipular outros atributos da avaliação
-    }
+     }
 }

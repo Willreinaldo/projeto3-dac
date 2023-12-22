@@ -47,7 +47,7 @@ public class EmpresaService {
             entity = repository.save(entity);
             return new EmpresaDTO(entity);
         } catch (Exception e) {
-            throw new DatabaseException("Erro ao criar uma nova Empresa");
+            throw new DatabaseException("Erro ao criar uma nova Empresa", e);
         }
     }
 
@@ -61,7 +61,7 @@ public class EmpresaService {
         } catch (EntityNotFoundException e) {
             throw new ResourceNotFoundException("Empresa não encontrada com o ID: " + id);
         } catch (Exception e) {
-            throw new DatabaseException("Erro ao atualizar os dados da Empresa com ID: " + id);
+            throw new DatabaseException("Erro ao atualizar os dados da Empresa com ID: " + id, e);
         }
     }
 
@@ -71,15 +71,14 @@ public class EmpresaService {
         } catch (EmptyResultDataAccessException e) {
             throw new ResourceNotFoundException("Empresa não encontrada com o ID: " + id);
         } catch (DataIntegrityViolationException e) {
-            throw new DatabaseException("Violação de integridade ao remover Empresa com ID: " + id);
+            throw new DatabaseException("Violação de integridade ao remover Empresa com ID: " + id, e);
         } catch (Exception e) {
-            throw new DatabaseException("Erro ao remover a Empresa com ID: " + id);
+            throw new DatabaseException("Erro ao remover a Empresa com ID: " + id, e);
         }
     }
 
     private void copyDtoToEntity(EmpresaDTO dto, Empresa entity) {
-        entity.setId(dto.getId());
-        entity.setNome(dto.getNome());
+         entity.setNome(dto.getNome());
         entity.setCnpj(dto.getCnpj());
         // Se necessário, adicione aqui a lógica para manipular a lista de alunos associados à empresa
     }

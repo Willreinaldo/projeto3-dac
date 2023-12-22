@@ -29,7 +29,7 @@ public class EmpresaResource {
             Page<EmpresaDTO> empresas = empresaService.findAllPaged(pageable);
             return ResponseEntity.ok(empresas);
         } catch (Exception e) {
-            throw new DatabaseException("Erro ao buscar as empresas");
+            throw new DatabaseException("Erro ao buscar as empresas", e);
         }
     }
 
@@ -42,7 +42,7 @@ public class EmpresaResource {
         } catch (ResourceNotFoundException e) {
             throw new ResourceNotFoundException("Empresa não encontrada com o ID: " + id);
         } catch (Exception e) {
-            throw new DatabaseException("Erro ao buscar a empresa com ID: " + id);
+            throw new DatabaseException("Erro ao buscar a empresa com ID: " + id, e);
         }
     }
 
@@ -52,7 +52,7 @@ public class EmpresaResource {
             EmpresaDTO empresaCriada = empresaService.criarEmpresa(novaEmpresa);
             return ResponseEntity.status(HttpStatus.CREATED).body(empresaCriada);
         } catch (DatabaseException e) {
-            throw new DatabaseException("Erro ao criar uma nova Empresa");
+            throw new DatabaseException("Erro ao criar uma nova Empresa", e);
         }
     }
 
@@ -64,7 +64,7 @@ public class EmpresaResource {
         } catch (ResourceNotFoundException e) {
             throw new ResourceNotFoundException("Empresa não encontrada com o ID: " + id);
         } catch (DatabaseException e) {
-            throw new DatabaseException("Erro ao atualizar os dados da Empresa com ID: " + id);
+            throw new DatabaseException("Erro ao atualizar os dados da Empresa com ID: " + id, e);
         }
     }
 
@@ -76,7 +76,7 @@ public class EmpresaResource {
         } catch (ResourceNotFoundException e) {
             throw new ResourceNotFoundException("Empresa não encontrada com o ID: " + id);
         } catch (DatabaseException e) {
-            throw new DatabaseException("Erro ao remover a Empresa com ID: " + id);
+            throw new DatabaseException("Erro ao remover a Empresa com ID: " + id, e);
         }
     }
 }

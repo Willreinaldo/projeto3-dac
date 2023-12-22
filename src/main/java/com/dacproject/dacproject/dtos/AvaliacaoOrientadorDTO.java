@@ -1,6 +1,8 @@
 package com.dacproject.dacproject.dtos;
 
 import com.dacproject.dacproject.entities.Aluno;
+import com.dacproject.dacproject.entities.AvaliacaoEmpresa;
+import com.dacproject.dacproject.entities.AvaliacaoOrientador;
 import com.dacproject.dacproject.entities.Orientador;
 import com.dacproject.dacproject.enums.AvaliacaoEnum;
 
@@ -34,6 +36,17 @@ public class AvaliacaoOrientadorDTO {
         this.iniciativaSensoCritico = iniciativaSensoCritico;
     }
 
+    public AvaliacaoOrientadorDTO(AvaliacaoOrientador avaliacaoOrientador) {
+        // Construtor padrão
+        this.id = avaliacaoOrientador.getId();
+        this.aluno = avaliacaoOrientador.getAluno();
+        this.orientador = avaliacaoOrientador.getOrientador();
+        this.assiduidade = avaliacaoOrientador.getAssiduidade();
+        this.disciplina = avaliacaoOrientador.getDisciplina();
+        this.sociabilidade = avaliacaoOrientador.getSociabilidade();
+        this.responsabilidade = avaliacaoOrientador.getResponsabilidade();
+        this.iniciativaSensoCritico = avaliacaoOrientador.getIniciativaSensoCritico();
+    }
     // Getters e setters
 
     public Long getId() {
